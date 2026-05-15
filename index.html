@@ -328,15 +328,6 @@
     <p class="hook-line">The hard part isn't the code. It's knowing what to say.</p>
   </div>
 
-  <!-- Fork -->
-  <div class="fork" id="fork-buttons">
-    <button class="fork-button active" id="btn-nontechnical" onclick="selectTrack('nontechnical')">
-      I use ChatGPT<br>or Claude.ai
-    </button>
-    <button class="fork-button" id="btn-technical" onclick="selectTrack('technical')">
-      I use Claude Code<br>or AI agents
-    </button>
-  </div>
 
   <!-- Non-Technical Track -->
   <section class="section nontechnical-only">
@@ -410,6 +401,12 @@ If something is missing, name it specifically.</div>
 
     <h3>Small Things Add Up</h3>
     <p>Customizing AI isn't one big setup. It's small deliberate choices that compound. Configure a notification when Claude stops so you're not watching a screen. Set a keyboard shortcut you actually use. Write down one decision rule. These add up to a system that works for you, not against you. Start tonight with the identity file. Everything else follows.</p>
+
+    <div style="margin-top: var(--spacing-2xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-accent-light); text-align: center;">
+      <button class="fork-button" onclick="selectTrack('technical')" style="width: 100%;">
+        Switch to Technical Track
+      </button>
+    </div>
   </section>
 
   <!-- Technical Track -->
@@ -532,6 +529,12 @@ I want a critical review against [criteria]. Be direct about what's weak.</div>
 }</div>
 
     <p>The point isn't the notification. The point is that every small deliberate customization compounds. This took 2 minutes. It changed how the session feels. That's what building a system around the intelligence looks like.</p>
+
+    <div style="margin-top: var(--spacing-2xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-accent-light); text-align: center;">
+      <button class="fork-button" onclick="selectTrack('nontechnical')" style="width: 100%;">
+        Switch to Non-Technical Track
+      </button>
+    </div>
   </section>
 
   <!-- Footer -->
@@ -545,25 +548,13 @@ I want a critical review against [criteria]. Be direct about what's weak.</div>
 <script>
   function selectTrack(track) {
     const body = document.body;
-    const btnNonTech = document.getElementById('btn-nontechnical');
-    const btnTech = document.getElementById('btn-technical');
-
     if (track === 'technical') {
       body.classList.add('show-technical');
-      btnTech.classList.add('active');
-      btnNonTech.classList.remove('active');
     } else {
       body.classList.remove('show-technical');
-      btnNonTech.classList.add('active');
-      btnTech.classList.remove('active');
     }
     window.scrollTo(0, 0);
   }
-
-  // Initialize on page load
-  document.addEventListener('DOMContentLoaded', function() {
-    selectTrack('nontechnical');
-  });
 </script>
 
 </body>
