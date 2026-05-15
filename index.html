@@ -7,20 +7,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-cream: oklch(97% 0.008 85);
-      --color-dark: oklch(15% 0.02 260);
-      --color-accent: oklch(65% 0.14 75);
-      --color-accent-light: oklch(85% 0.06 75);
+      --cream:         oklch(97% 0.008 85);
+      --dark:          oklch(15% 0.02 260);
+      --accent:        oklch(65% 0.14 75);
+      --accent-mid:    oklch(78% 0.07 75);
+      --accent-light:  oklch(93% 0.03 85);
 
       --font-display: "Spectral", serif;
-      --font-body: "Figtree", sans-serif;
+      --font-body:    "Figtree", sans-serif;
 
-      --spacing-xs: 0.5rem;
-      --spacing-sm: 1rem;
-      --spacing-md: 1.5rem;
-      --spacing-lg: 2rem;
-      --spacing-xl: 3rem;
-      --spacing-2xl: 4rem;
+      --space-xs:  0.5rem;
+      --space-sm:  1rem;
+      --space-md:  1.5rem;
+      --space-lg:  2rem;
+      --space-xl:  3rem;
+      --space-2xl: 4.5rem;
     }
 
     * {
@@ -34,228 +35,242 @@
     }
 
     body {
-      background-color: var(--color-cream);
-      color: var(--color-dark);
+      background-color: var(--cream);
+      color: var(--dark);
       font-family: var(--font-body);
-      line-height: 1.6;
       font-size: 16px;
+      line-height: 1.65;
     }
 
-    /* Typography */
+    /* ── Typography ── */
+
     h1 {
       font-family: var(--font-display);
-      font-size: clamp(1.75rem, 5vw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: var(--spacing-sm);
+      font-size: clamp(1.75rem, 5vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: var(--space-xs);
+      letter-spacing: -0.01em;
     }
 
     h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      font-size: clamp(1.3rem, 4vw, 1.75rem);
       font-weight: 600;
-      margin-top: var(--spacing-xl);
-      margin-bottom: var(--spacing-md);
-      color: var(--color-accent);
+      line-height: 1.25;
+      color: var(--accent);
+      margin-top: var(--space-xl);
+      margin-bottom: var(--space-md);
     }
 
     h3 {
       font-family: var(--font-display);
-      font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+      font-size: clamp(1.05rem, 3vw, 1.3rem);
       font-weight: 600;
-      margin-top: var(--spacing-lg);
-      margin-bottom: var(--spacing-sm);
+      line-height: 1.3;
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-xs);
     }
 
     p {
-      margin-bottom: var(--spacing-md);
       max-width: 65ch;
+      margin-bottom: var(--space-md);
     }
 
     ul, ol {
-      margin-left: var(--spacing-md);
-      margin-bottom: var(--spacing-md);
+      margin-left: var(--space-md);
+      margin-bottom: var(--space-md);
     }
 
     li {
-      margin-bottom: var(--spacing-sm);
       max-width: 65ch;
+      margin-bottom: var(--space-xs);
     }
+
+    strong {
+      font-weight: 600;
+    }
+
+    /* ── Code ── */
 
     code {
       font-family: "Courier New", monospace;
-      background-color: var(--color-accent-light);
-      padding: 0.25rem 0.5rem;
+      background-color: var(--accent-light);
+      padding: 0.2em 0.45em;
       border-radius: 3px;
-      font-size: 0.95em;
+      font-size: 0.92em;
     }
 
     pre {
-      background-color: var(--color-accent-light);
-      padding: var(--spacing-md);
+      background-color: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      padding: var(--space-md);
       border-radius: 6px;
       overflow-x: auto;
-      margin-bottom: var(--spacing-md);
-      line-height: 1.5;
-      font-size: 0.9rem;
+      margin-top: var(--space-sm);
+      margin-bottom: var(--space-md);
+      line-height: 1.55;
+      font-size: 0.88rem;
     }
 
     pre code {
       background: none;
       padding: 0;
       border-radius: 0;
+      font-size: inherit;
     }
 
-    .metadata {
-      font-size: 0.9rem;
-      color: var(--color-accent);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: var(--spacing-sm);
-    }
+    /* ── Layout ── */
 
-    /* Layout */
     .container {
-      max-width: 700px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: var(--spacing-lg);
+      padding: 0 var(--space-lg);
     }
+
+    /* ── Header ── */
 
     .header {
       text-align: center;
-      padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-xl);
-      border-bottom: 1px solid var(--color-accent);
+      padding: var(--space-2xl) var(--space-lg) var(--space-xl);
+      border-bottom: 1px solid var(--accent-mid);
     }
 
-    .header h1 {
-      margin-bottom: var(--spacing-xs);
-    }
-
-    .header .metadata {
-      margin-bottom: var(--spacing-md);
-    }
-
-    .hook-line {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 3vw, 1.3rem);
-      font-style: italic;
-      color: var(--color-accent);
-      margin-bottom: var(--spacing-xl);
-      line-height: 1.4;
-    }
-
-    /* Fork / Track Selection */
-    .fork {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-md);
-      margin: var(--spacing-2xl) 0;
-    }
-
-    .fork-button {
-      display: block;
-      padding: var(--spacing-lg) var(--spacing-md);
-      text-align: center;
-      text-decoration: none;
-      border: 2px solid var(--color-accent);
-      border-radius: 6px;
-      background-color: transparent;
-      color: var(--color-dark);
-      font-family: var(--font-body);
-      font-size: 1rem;
+    .eyebrow {
+      font-size: 0.8rem;
       font-weight: 600;
-      transition: all 0.3s ease-out;
-      cursor: pointer;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-sm);
     }
 
-    .fork-button:hover {
-      background-color: var(--color-accent);
-      color: var(--color-cream);
+    .hook {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1rem, 2.8vw, 1.2rem);
+      color: var(--accent);
+      margin-top: var(--space-md);
+      line-height: 1.45;
     }
 
-    .fork-button.active {
-      background-color: var(--color-accent);
-      color: var(--color-cream);
-    }
+    /* ── Sections ── */
 
-    /* Sections */
     .section {
-      padding: var(--spacing-2xl) 0;
-      border-top: 1px solid var(--color-accent);
+      padding: var(--space-xl) 0 var(--space-2xl);
+      border-top: 1px solid var(--accent-mid);
     }
 
     .section:first-of-type {
       border-top: none;
     }
 
-    /* Identity File Example */
-    .example-box {
-      background-color: var(--color-accent-light);
-      padding: var(--spacing-md);
+    .section > h2:first-child {
+      margin-top: 0;
+    }
+
+    /* ── Example / callout box ── */
+
+    .callout {
+      background-color: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      padding: var(--space-md);
       border-radius: 6px;
-      margin: var(--spacing-lg) 0;
-      border-left: 3px solid var(--color-accent);
+      margin: var(--space-lg) 0;
     }
 
-    .example-box h4 {
+    .callout-label {
       font-family: var(--font-display);
-      font-size: 1rem;
-      margin-bottom: var(--spacing-sm);
-      color: var(--color-accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
     }
 
-    .example-box p {
+    .callout p {
       font-size: 0.95rem;
-      margin-bottom: var(--spacing-sm);
+      margin-bottom: var(--space-xs);
     }
 
-    .example-box p:last-child {
+    .callout p:last-child {
       margin-bottom: 0;
     }
 
-    /* Prompts */
-    .prompt-box {
-      background-color: var(--color-accent-light);
-      padding: var(--spacing-md);
+    /* ── Prompt box ── */
+
+    .prompt {
+      background-color: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      padding: var(--space-md);
       border-radius: 6px;
-      margin: var(--spacing-md) 0;
+      margin: var(--space-xs) 0 var(--space-lg);
       font-family: "Courier New", monospace;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.6;
       white-space: pre-wrap;
-      word-wrap: break-word;
+      word-break: break-word;
     }
 
-    .prompt-label {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--color-accent);
-      margin-bottom: var(--spacing-sm);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+    /* ── Diagram ── */
 
-    /* Diagram */
     .diagram {
-      max-width: 100%;
+      display: block;
+      max-width: min(380px, 100%);
       height: auto;
-      margin: var(--spacing-xl) 0;
-      border-radius: 6px;
+      margin: var(--space-lg) auto;
+      border-radius: 4px;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--color-accent);
-      padding: var(--spacing-xl) var(--spacing-lg);
+    /* ── Track switch button ── */
+
+    .switch-btn {
+      display: block;
+      width: 100%;
+      padding: var(--space-md) var(--space-lg);
       text-align: center;
-      margin-top: var(--spacing-2xl);
+      background-color: transparent;
+      color: var(--dark);
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition:
+        background-color 0.18s cubic-bezier(0.25, 0, 0, 1),
+        color 0.18s cubic-bezier(0.25, 0, 0, 1);
+    }
+
+    .switch-btn:hover {
+      background-color: var(--accent);
+      color: var(--cream);
+    }
+
+    .switch-btn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .switch-wrap {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--accent-mid);
+    }
+
+    /* ── Footer ── */
+
+    footer {
+      border-top: 1px solid var(--accent-mid);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
       font-size: 0.9rem;
+      color: oklch(40% 0.02 260);
     }
 
     footer a {
-      color: var(--color-accent);
+      color: var(--accent);
       text-decoration: none;
       font-weight: 600;
     }
@@ -264,83 +279,70 @@
       text-decoration: underline;
     }
 
-    /* Print */
-    @media print {
-      .fork {
-        display: none;
-      }
+    /* ── Track visibility ── */
 
-      .section {
-        page-break-inside: avoid;
-      }
-    }
+    .nontechnical-only { display: block; }
+    .technical-only    { display: none;  }
 
-    /* Mobile */
+    body.show-technical .nontechnical-only { display: none;  }
+    body.show-technical .technical-only    { display: block; }
+
+    /* ── Responsive ── */
+
     @media (max-width: 640px) {
       .container {
-        padding: var(--spacing-md);
+        padding: 0 var(--space-md);
       }
 
       .header {
-        padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
-      }
-
-      .fork {
-        grid-template-columns: 1fr;
-      }
-
-      .fork-button {
-        padding: var(--spacing-md);
-        font-size: 0.95rem;
+        padding: var(--space-xl) var(--space-md) var(--space-lg);
       }
     }
 
-    /* Hide/show by track */
-    .nontechnical-only {
-      display: block;
+    /* ── Print ── */
+
+    @media print {
+      .switch-wrap { display: none; }
+      .nontechnical-only,
+      .technical-only { display: block; }
+      .section { page-break-inside: avoid; }
     }
 
-    .technical-only {
-      display: none;
-    }
+    /* ── Reduced motion ── */
 
-    body.show-technical .nontechnical-only {
-      display: none;
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .switch-btn { transition: none; }
     }
-
-    body.show-technical .technical-only {
-      display: block;
-    }
-
   </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- Header -->
-  <div class="header">
-    <div class="metadata">Mindstone Amsterdam — May 20, 2026</div>
+  <header class="header">
+    <p class="eyebrow">Mindstone Amsterdam &nbsp;·&nbsp; May 20, 2026</p>
     <h1>Teaching AI Who You Are</h1>
-    <p class="hook-line">The hard part isn't the code. It's knowing what to say.</p>
-  </div>
+    <p class="hook">The hard part isn't the code. It's knowing what to say.</p>
+  </header>
 
+  <!-- ── Non-Technical Track ── -->
+  <section class="section nontechnical-only" aria-label="Non-technical track">
 
-  <!-- Non-Technical Track -->
-  <section class="section nontechnical-only">
     <h2>Start Here</h2>
 
     <h3>The Four Layers</h3>
     <p>Most people use AI like a search engine. The ones getting real value have built a system around it. That system isn't code. It's clarity about who you are, what you need, and what you want it to do.</p>
-
     <p>There are four layers to this system. Three of them you build. One is the model.</p>
 
-    <img src="diagram.png" alt="Diagram showing four layers: Identity, Memory, Tools, Constraints, between You and The Model" class="diagram">
+    <img src="diagram.png"
+         alt="Cross-section diagram: You at top, then four layers (Identity, Memory, Tools, Constraints), then The Model at bottom"
+         class="diagram">
 
     <h3>Your Identity File</h3>
-    <p>Start with one file. A plain text document that describes how you think.</p>
+    <p>Start with one file. A plain text document that describes how you think. Copy it into your AI tool's custom instructions. The model reads it before every conversation.</p>
 
-    <p><strong>Part 1: The Philosophical Layer</strong> (Copy this into your AI custom instructions)</p>
+    <p><strong>Part 1: The philosophical layer</strong></p>
     <ol>
       <li>How do you think and process information?</li>
       <li>What do you actually value in your work?</li>
@@ -348,154 +350,159 @@
       <li>What should AI never do on your behalf?</li>
     </ol>
 
-    <p><strong>Part 2: The Operational Layer</strong> (Add this for practical value)</p>
+    <p><strong>Part 2: The operational layer</strong></p>
     <ol start="5">
-      <li>Your professional context — role, domain, what you already know</li>
-      <li>Tone and response style — direct or conversational? Options or one recommendation? How long should responses be?</li>
+      <li>Your professional context: role, domain, what you already know</li>
+      <li>Tone and response style: direct or discursive? Options or one recommendation? How long?</li>
       <li>What annoys you in responses</li>
-      <li>Current focus areas — update this regularly</li>
+      <li>Current focus areas (update this regularly)</li>
     </ol>
 
-    <div class="example-box">
-      <h4>Example Identity File</h4>
-      <p><strong>How I think:</strong> I process information systematically. I prefer frameworks and patterns. I don't like unexplained jargon.</p>
-      <p><strong>What I value:</strong> Speed with precision. Clarity over completeness. Being wrong fast beats being right slowly.</p>
-      <p><strong>How I decide:</strong> I want options first, then a recommendation. Walk me through the reasoning, not just the conclusion.</p>
-      <p><strong>My tone:</strong> Be direct. Short sentences. Tell me what's weak, not just what's good.</p>
-      <p><strong>What annoys me:</strong> Hedge language like "it might be" or "arguably." Either say it or don't.</p>
+    <div class="callout">
+      <p class="callout-label">Example</p>
+      <p><strong>How I think:</strong> Systematically. I prefer frameworks and patterns over gut feel.</p>
+      <p><strong>What I value:</strong> Speed with precision. Being wrong fast beats being right slowly.</p>
+      <p><strong>How I decide:</strong> Options first, then a recommendation. Walk me through the reasoning.</p>
+      <p><strong>Tone:</strong> Direct. Short sentences. Tell me what's weak, not just what's good.</p>
+      <p><strong>What annoys me:</strong> Hedge language like "it might be." Either say it or don't.</p>
       <p><strong>Current focus:</strong> Shipping products. Data quality. Teams.</p>
     </div>
 
     <h3>Where to Put It</h3>
-    <p><strong>ChatGPT:</strong> Settings → Personalization → Custom Instructions → paste your identity file</p>
-    <p><strong>Claude.ai:</strong> Create a Project → Add project instructions → paste your identity file</p>
+    <p><strong>ChatGPT:</strong> Settings &rarr; Personalization &rarr; Custom Instructions &rarr; paste your file</p>
+    <p><strong>Claude.ai:</strong> Create a Project &rarr; Add project instructions &rarr; paste your file</p>
 
-    <h3>Session Prompts — Pick by Session Type</h3>
+    <h3>Session Prompts</h3>
+    <p>Different sessions need different opening frames. Pick the right one.</p>
 
-    <p><strong>Planning session</strong> (when you're figuring something out)</p>
-    <div class="prompt-box">I'm trying to figure out: [X].
+    <p><strong>Planning</strong> (figuring something out)</p>
+    <div class="prompt">I'm trying to figure out: [X].
 My goal is: [Y].
 I don't want solutions yet — walk me through the problem first.
 Ask me clarifying questions. Then help me think through the options.</div>
 
-    <p><strong>Execution session</strong> (when you know what you want and need to do it)</p>
-    <div class="prompt-box">I need to get [X] done today.
+    <p><strong>Execution</strong> (you know what you want)</p>
+    <div class="prompt">I need to get [X] done today.
 Here's exactly what I want: [specific output].
 My constraints: [time / format / audience].
 Draft it. Then I'll tell you what to adjust.</div>
 
-    <p><strong>Review session</strong> (when you have something and want to check it)</p>
-    <div class="prompt-box">Here's what I produced: [paste].
+    <p><strong>Review</strong> (checking what you have)</p>
+    <div class="prompt">Here's what I produced: [paste].
 I want you to check it against [goal / criteria].
 Be direct. Tell me what's weak, not just what's good.
 If something is missing, name it specifically.</div>
 
     <h3>Small Things Add Up</h3>
-    <p>Customizing AI isn't one big setup. It's small deliberate choices that compound. Configure a notification when Claude stops so you're not watching a screen. Set a keyboard shortcut you actually use. Write down one decision rule. These add up to a system that works for you, not against you. Start tonight with the identity file. Everything else follows.</p>
+    <p>Customizing AI isn't one big setup. It's small deliberate choices that compound. Configure a notification when Claude stops so you're not watching a screen. Set a keyboard shortcut you actually use. Write down one decision rule. Start tonight with the identity file. Everything else follows.</p>
 
-    <div style="margin-top: var(--spacing-2xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-accent-light); text-align: center;">
-      <button class="fork-button" onclick="selectTrack('technical')" style="width: 100%;">
+    <div class="switch-wrap">
+      <button type="button" class="switch-btn" onclick="selectTrack('technical')">
         Switch to Technical Track
       </button>
     </div>
+
   </section>
 
-  <!-- Technical Track -->
-  <section class="section technical-only">
+  <!-- ── Technical Track ── -->
+  <section class="section technical-only" aria-label="Technical track">
+
     <h2>For Builders</h2>
 
-    <h3>This Is About Making Claude Code Yours</h3>
-    <p>You already have Claude Code running. This track is about the system you build around it — files, rituals, and patterns that turn a generic model into something that actually works with how you think.</p>
+    <h3>Making Claude Code Yours</h3>
+    <p>You already have Claude Code running. This track is about the system you build around it: files, rituals, and patterns that turn a generic model into something that works with how you think.</p>
 
-    <img src="diagram.png" alt="Diagram showing four layers: Identity, Memory, Tools, Constraints, between You and The Model" class="diagram">
+    <img src="diagram.png"
+         alt="Cross-section diagram: You at top, then four layers (Identity, Memory, Tools, Constraints), then The Model at bottom"
+         class="diagram">
 
-    <h3>Layer 1: Your CLAUDE.md</h3>
-    <p>A plain text file at your project root. Claude reads it before every conversation.</p>
+    <h3>Layer 1: CLAUDE.md</h3>
+    <p>A plain text file at your project root. Claude reads it before every conversation. For global defaults, put it in <code>~/.claude/CLAUDE.md</code>.</p>
 
-    <div class="example-box">
-      <h4>Template Structure</h4>
+    <div class="callout">
+      <p class="callout-label">Template</p>
       <pre><code># [Your Name] — AI Identity File
 
 ## Who I am
 [Role, domain, what you already know — so Claude doesn't over-explain]
 
 ## How I think
-[How you process information. Visual? Systematic? Intuition-first?]
+[How you process information. Systematic? Visual? Intuition-first?]
 
 ## What I value
-[Actual values in work. Directness? Precision? Speed? Craft?]
+[Actual values in your work. Directness? Precision? Speed? Craft?]
 
 ## How I make decisions
-[Under uncertainty: do you want options? One recommendation? To think out loud first?]
+[Under uncertainty: options first? One recommendation? Think out loud?]
 
 ## Tone and style
 [What kind of responses work for you. Length, format, what annoys you.]
 
 ## Current focus
-[Live projects, active decisions, what's in play right now. Update regularly.]
+[Live projects, active decisions. Update this regularly.]
 
 ## Hard constraints
-[What Claude should never do without asking first.]</code></pre>
+[What Claude should never do without asking you first.]</code></pre>
     </div>
 
-    <div class="example-box">
-      <h4>Real Example</h4>
-      <p><strong>Who I am:</strong> Builder. Financial data + design + product. 10 years shipping. No ML background.</p>
+    <div class="callout">
+      <p class="callout-label">Real example</p>
+      <p><strong>Who I am:</strong> Builder. Financial data, design, product. 10 years shipping. No ML background.</p>
       <p><strong>How I think:</strong> Systems over isolated features. I debug by asking why, not by guessing.</p>
       <p><strong>What I value:</strong> Clarity. Precision. Not being over-explained.</p>
-      <p><strong>How I decide:</strong> Walk me through the problem first. Then options. Then a single recommendation with reasoning.</p>
+      <p><strong>How I decide:</strong> Walk me through the problem. Then options. Then a single recommendation with reasoning.</p>
       <p><strong>Tone:</strong> Direct. Short sentences. Code examples when helpful. Tell me what's weak.</p>
-      <p><strong>Current focus:</strong> Closing financial readiness. AR/AP matching. Data quality gates.</p>
-      <p><strong>Hard constraints:</strong> Never run a deploy without asking first. No Netherlands-specific content publicly visible.</p>
+      <p><strong>Current focus:</strong> Financial data quality. AR/AP matching. Closing readiness.</p>
+      <p><strong>Hard constraints:</strong> Never run a deploy without asking. Never share client data publicly.</p>
     </div>
 
     <h3>Layer 2: Memory System</h3>
-    <p>Flat files in <code>~/.claude/projects/&lt;project&gt;/memory/</code>. Four types that matter:</p>
+    <p>Flat files in <code>~/.claude/projects/&lt;project&gt;/memory/</code>. Four types:</p>
     <ul>
       <li><code>user_*.md</code> — who you are, how you work</li>
       <li><code>feedback_*.md</code> — corrections and confirmed approaches</li>
       <li><code>project_*.md</code> — live decisions, what's in progress</li>
       <li><code>reference_*.md</code> — where to find external information</li>
     </ul>
-    <p>Each has frontmatter: <code>name</code>, <code>description</code>, <code>type</code>. An index file <code>MEMORY.md</code> has one line per memory and is always loaded. Claude reads these at the start of every conversation.</p>
+    <p>Each file has frontmatter: <code>name</code>, <code>description</code>, <code>type</code>. An index file <code>MEMORY.md</code> stays one line per memory and is always loaded. Claude reads all of it at the start of every conversation.</p>
 
-    <h3>Layer 3: Session Rituals — Three Variants</h3>
-    <p>Different session types need different opening frames. Pick the right one.</p>
+    <h3>Layer 3: Session Rituals</h3>
+    <p>Different session types need different opening frames.</p>
 
-    <p><strong>Planning session</strong> (figuring something out, not executing)</p>
-    <div class="prompt-box">/session-start [planning]
+    <p><strong>Planning</strong> (figuring something out, not executing yet)</p>
+    <div class="prompt">/session-start [planning]
 Working on: [X]
 Goal for this session: figure out [Y], not execute it.
 Call tools as needed to help me think. Walk me through things if I'm unclear.
 Mix options if there's more than one good path.
 Don't move to execution until I say so.</div>
 
-    <p><strong>Execution session</strong> (you know what you want, go fast)</p>
-    <div class="prompt-box">/session-start [execution]
+    <p><strong>Execution</strong> (you know what you want, go fast)</p>
+    <div class="prompt">/session-start [execution]
 Working on: [X]
 I know what I want. Execute [specific task].
 Check in at natural breakpoints. Don't ask for permission on small decisions.</div>
 
-    <p><strong>Review session</strong> (critical feedback on existing work)</p>
-    <div class="prompt-box">/session-start [review]
+    <p><strong>Review</strong> (critical feedback on existing work)</p>
+    <div class="prompt">/session-start [review]
 Working on: [X]
 Here's what was produced: [link/paste].
 I want a critical review against [criteria]. Be direct about what's weak.</div>
 
     <h3>Layer 4: Plan Mode as a Working Pattern</h3>
-    <p>The most underused feature for non-engineers.</p>
+    <p>The most underused feature for non-engineers. The workflow:</p>
     <ol>
       <li>Enter plan mode before any execution</li>
-      <li>Use it to think — ask Claude to walk you through the problem, call tools mid-plan to get real data, mix options, ask "why" questions</li>
-      <li>When the plan is clear in your head, exit plan mode and execute</li>
+      <li>Think out loud: ask Claude to walk you through the problem, call tools mid-plan for real data, mix options, ask "why" questions</li>
+      <li>When the plan is clear, exit plan mode and execute</li>
       <li>The discipline: never execute until the plan is actually clear. Plan mode is the thinking space.</li>
     </ol>
-    <p>This shifts Claude from "autocomplete" to "thinking partner with selective execution." The execution happens faster because the thinking happened first.</p>
+    <p>This shifts Claude from autocomplete to thinking partner with selective execution. The execution happens faster because the thinking happened first.</p>
 
-    <h3>Small Things Add Up: Hooks &amp; Notifications</h3>
-    <p>Example: add a macOS notification that fires when Claude stops or needs input.</p>
+    <h3>Small Things Add Up: Hooks and Notifications</h3>
+    <p>Add a macOS notification when Claude stops or needs input. Two minutes of setup, changes how the session feels.</p>
 
-    <div class="prompt-box">In ~/.claude/settings.json:
+    <div class="prompt">In ~/.claude/settings.json:
 
 {
   "hooks": {
@@ -513,32 +520,26 @@ I want a critical review against [criteria]. Be direct about what's weak.</div>
   }
 }</div>
 
-    <p>The point isn't the notification. The point is that every small deliberate customization compounds. This took 2 minutes. It changed how the session feels. That's what building a system around the intelligence looks like.</p>
+    <p>The point isn't the notification. The point is that every small deliberate customization compounds. That's what building a system around the intelligence looks like.</p>
 
-    <div style="margin-top: var(--spacing-2xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-accent-light); text-align: center;">
-      <button class="fork-button" onclick="selectTrack('nontechnical')" style="width: 100%;">
+    <div class="switch-wrap">
+      <button type="button" class="switch-btn" onclick="selectTrack('nontechnical')">
         Switch to Non-Technical Track
       </button>
     </div>
+
   </section>
 
-  <!-- Footer -->
   <footer>
-    <p>Made by <a href="https://www.linkedin.com/in/toyesh-c/" target="_blank">Toyesh Chakravorty</a></p>
-    <p style="margin-top: var(--spacing-sm); font-size: 0.85rem;">Scan again to pick the other track, or bookmark this page.</p>
+    <p>Made by <a href="https://www.linkedin.com/in/toyesh-c/" target="_blank" rel="noopener">Toyesh Chakravorty</a></p>
   </footer>
 
 </div>
 
 <script>
   function selectTrack(track) {
-    const body = document.body;
-    if (track === 'technical') {
-      body.classList.add('show-technical');
-    } else {
-      body.classList.remove('show-technical');
-    }
-    window.scrollTo(0, 0);
+    document.body.classList.toggle('show-technical', track === 'technical');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
 
