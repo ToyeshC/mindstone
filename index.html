@@ -213,14 +213,153 @@
       word-break: break-word;
     }
 
-    /* ── Diagram ── */
+    /* ── Interactive layer stack ── */
 
-    .diagram {
+    .layer-stack {
+      margin: var(--space-lg) 0 var(--space-xl);
+    }
+
+    .layer-stack-shell {
+      display: grid;
+      gap: var(--space-md);
+      justify-items: center;
+    }
+
+    .layer-stack-you,
+    .layer-stack-model,
+    .layer-btn {
+      width: min(440px, 100%);
+      border-radius: 999px;
+      text-align: center;
+    }
+
+    .layer-stack-you,
+    .layer-stack-model {
+      border: 1px solid var(--accent-mid);
+      background-color: var(--cream);
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .layer-btn {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 0.9rem;
+      border: 1px solid var(--accent-mid);
+      background-color: #fffaf2;
+      padding: 0.95rem 1.1rem;
+      color: var(--dark);
+      cursor: pointer;
+      transition:
+        border-color 0.18s cubic-bezier(0.25, 0, 0, 1),
+        background-color 0.18s cubic-bezier(0.25, 0, 0, 1),
+        transform 0.18s cubic-bezier(0.25, 0, 0, 1);
+    }
+
+    .layer-btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .layer-btn.is-active {
+      background-color: var(--accent-light);
+      border-color: var(--accent);
+    }
+
+    .layer-btn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .layer-btn-num {
+      width: 2.05rem;
+      height: 2.05rem;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      background-color: var(--accent);
+      color: var(--cream);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .layer-btn-copy {
+      text-align: left;
+    }
+
+    .layer-btn-title {
       display: block;
-      max-width: min(380px, 100%);
-      height: auto;
-      margin: var(--space-lg) auto;
-      border-radius: 4px;
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 0.18rem;
+    }
+
+    .layer-btn-desc {
+      display: block;
+      font-size: 0.9rem;
+      color: oklch(38% 0.02 260);
+      line-height: 1.45;
+    }
+
+    .layer-detail {
+      margin-top: var(--space-lg);
+      background-color: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      border-radius: 8px;
+      padding: var(--space-md);
+    }
+
+    .layer-detail-label {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .layer-detail h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 0.55rem;
+    }
+
+    .layer-detail p:last-child {
+      margin-bottom: 0;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+
+    .mini-card {
+      border: 1px solid var(--accent-mid);
+      border-radius: 8px;
+      padding: var(--space-md);
+      background-color: #fffaf2;
+    }
+
+    .mini-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.45rem;
+    }
+
+    .mini-card p:last-child {
+      margin-bottom: 0;
     }
 
     /* ── Companion frames ── */
@@ -353,6 +492,15 @@
       .header {
         padding: var(--space-xl) var(--space-md) var(--space-lg);
       }
+
+      .layer-btn {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+
+      .layer-btn-num {
+        margin-bottom: 0.25rem;
+      }
     }
 
     /* ── Print ── */
@@ -382,10 +530,10 @@
     <p class="hook">The hard part isn't the code. It's knowing what to say.</p>
   </header>
 
-  <section class="section frames" aria-label="Shared opening frame">
+  <section class="section frames" aria-label="Opening frame by Yu Sugiyama">
     <div class="frames-intro">
-      <h2>A shared opening frame</h2>
-      <p>These widen "how to use AI" to "what it means to live with it".</p>
+      <h2>An Opening Frame by Yu Sugiyama</h2>
+      <p>Yu's research on digital legacy and AI companionship opens the bigger question: what does it mean to live with AI across a lifetime? These three frames set the context for everything that follows.</p>
     </div>
 
     <div class="frames-list">
@@ -412,86 +560,123 @@
     <h2>For Everyone</h2>
 
     <h3>The Four Layers</h3>
-    <p>Most people use AI like a search engine. The ones getting real value have built a system around it. That system isn't code. It's clarity about who you are, what you need, and what you want it to do.</p>
-    <p>There are four layers to this system. Three of them you build. One is the model.</p>
+    <p>Most people use AI like a search engine. One question, one answer, move on. The problem is that every conversation begins from zero. The model has no memory of who you are, what you are working on, or what kind of answer is actually useful to you.</p>
+    <p>The people getting real value have built something around the model. Not necessarily code. A system. Click through the four layers below.</p>
 
-    <img src="images/diagram.png"
-         alt="Cross-section diagram: You at top, then four layers (Identity, Memory, Tools, Constraints), then The Model at bottom"
-         class="diagram">
+    <div class="layer-stack" data-track="general">
+      <div class="layer-stack-shell" aria-label="Four layers between you and the model">
+        <div class="layer-stack-you">You</div>
+        <button type="button" class="layer-btn" data-layer="identity">
+          <span class="layer-btn-num">1</span>
+          <span class="layer-btn-copy">
+            <span class="layer-btn-title">Identity</span>
+            <span class="layer-btn-desc">How you think. What you value. What good help feels like.</span>
+          </span>
+        </button>
+        <button type="button" class="layer-btn" data-layer="memory">
+          <span class="layer-btn-num">2</span>
+          <span class="layer-btn-copy">
+            <span class="layer-btn-title">Memory</span>
+            <span class="layer-btn-desc">What is live right now. Projects, decisions, unfinished loops.</span>
+          </span>
+        </button>
+        <button type="button" class="layer-btn" data-layer="tools">
+          <span class="layer-btn-num">3</span>
+          <span class="layer-btn-copy">
+            <span class="layer-btn-title">Tools</span>
+            <span class="layer-btn-desc">What the model can act on beyond chat.</span>
+          </span>
+        </button>
+        <button type="button" class="layer-btn" data-layer="constraints">
+          <span class="layer-btn-num">4</span>
+          <span class="layer-btn-copy">
+            <span class="layer-btn-title">Constraints</span>
+            <span class="layer-btn-desc">What it should never do without asking you first.</span>
+          </span>
+        </button>
+        <div class="layer-stack-model">The Model</div>
+      </div>
+
+      <div class="layer-detail" data-detail-panel>
+        <p class="layer-detail-label">Selected Layer</p>
+        <h4 data-detail-title>Identity</h4>
+        <p data-detail-body>Before AI can help well, it needs a usable picture of who it is helping. Identity is the layer that makes the answers feel like they were written for a person instead of for a generic internet average.</p>
+      </div>
+    </div>
 
     <h3>Your Identity File</h3>
-    <p>Start with one file. A plain text document that describes how you think. Copy it into your AI tool's custom instructions. The model reads it before every conversation.</p>
+    <p>Start with one file. A plain text document that describes how you think. Copy it into your AI tool's custom instructions or project settings. The model reads it before every conversation. Without it, you're a stranger every time.</p>
+    <p>The technical part takes an evening. The hard part is knowing what to write — because most people have never had to answer these questions explicitly.</p>
 
     <div class="callout">
       <p class="callout-label">Template</p>
       <pre><code># [Your Name] — AI Identity File
 
 ## Who I am
-[Role, domain, what you already know — so the model doesn't over-explain]
+[Role, domain, stage, what you already know, and what not to over-explain]
 
 ## How I think
-[How you process information. Systematic? Visual? Intuition-first?]
+[How you process information when something is unclear. Gap-first? Systematic? Verbally?]
 
 ## What I value
-[Actual values in your work. Directness? Precision? Speed? Craft?]
+[Concrete values in your work. Tangible impact? Speed? Precision? Honest critique?]
 
-## How I make decisions
-[Under uncertainty: options first? One recommendation? Think out loud?]
+## How I decide
+[Under uncertainty, what should the AI do: walk through the problem, compare options, recommend, wait?]
+
+## What I use AI for
+[Thinking partner, drafting, planning, coding, reviewing, or something else]
+
+## What annoys me
+[What makes answers useless for you: hedging, jargon, flattery, too much structure, vagueness]
 
 ## Tone and style
-[What kind of responses work for you. Length, format, what annoys you.]
+[Short or long? Conversational or formal? Prose or bullets?]
 
 ## Current focus
-[Live projects, active decisions. Update this regularly.]
+[What is live right now. Update this every few weeks.]
 
 ## Hard constraints
-[What the model should never do without asking you first.]</code></pre>
+[What AI should never do on your behalf without asking first.]</code></pre>
     </div>
-
-    <p><strong>Part 1: The philosophical layer</strong></p>
-    <ol>
-      <li>How do you think and process information?</li>
-      <li>What do you actually value in your work?</li>
-      <li>How do you make decisions when things are unclear?</li>
-      <li>What should AI never do on your behalf?</li>
-    </ol>
-
-    <p><strong>Part 2: The operational layer</strong></p>
-    <ol start="5">
-      <li>Your professional context: role, domain, what you already know</li>
-      <li>Tone and response style: direct or discursive? Options or one recommendation? How long?</li>
-      <li>What annoys you in responses</li>
-      <li>Current focus areas (update this regularly)</li>
-    </ol>
 
     <div class="callout">
-      <p class="callout-label">Example</p>
-      <p><strong>How I think:</strong> Systematically. I prefer frameworks and patterns over gut feel.</p>
-      <p><strong>What I value:</strong> Speed with precision. Being wrong fast beats being right slowly.</p>
-      <p><strong>How I decide:</strong> Options first, then a recommendation. Walk me through the reasoning.</p>
-      <p><strong>Tone:</strong> Direct. Short sentences. Tell me what's weak, not just what's good.</p>
-      <p><strong>What annoys me:</strong> Hedge language like "it might be." Either say it or don't.</p>
-      <p><strong>Current focus:</strong> Shipping products. Data quality. Teams.</p>
+      <p class="callout-label">A real example</p>
+      <p><strong>How I think:</strong> I find the gap first, then explore it slowly and steadily. I question assumptions before accepting them.</p>
+      <p><strong>What I value:</strong> Tangible impact over abstract cleverness. Honest answers over polished ones. Naming things well.</p>
+      <p><strong>How I decide:</strong> Walk me through the problem before you give me a plan. If I push back, it usually means something does not add up.</p>
+      <p><strong>Tone:</strong> Short sentences. No buzzwords. Casual but precise. Back claims with something concrete.</p>
+      <p><strong>Current focus:</strong> Active job search, one research follow-up, and a system idea from a recent hackathon worth developing further.</p>
     </div>
+
+    <h3>The Three Questions That Matter Most</h3>
+    <ol>
+      <li>How do you think?</li>
+      <li>What do you actually value?</li>
+      <li>What should AI never do on your behalf?</li>
+    </ol>
+    <p>Most people discover they have never answered those questions explicitly. That is the work. The AI setup is almost secondary.</p>
 
     <h3>Where to Put It</h3>
     <p><strong>ChatGPT:</strong> Settings &rarr; Personalization &rarr; Custom Instructions &rarr; paste your file</p>
     <p><strong>Claude.ai:</strong> Create a Project &rarr; Add project instructions &rarr; paste your file</p>
 
     <h3>Session Prompts</h3>
-    <p>Different sessions need different opening frames. Pick the right one.</p>
+    <p>Different sessions need different opening frames. A good opener tells the model what kind of help you want before it starts guessing.</p>
 
     <p><strong>Planning</strong> (figuring something out)</p>
     <div class="prompt">I'm trying to figure out: [X].
 My goal is: [Y].
-I don't want solutions yet — walk me through the problem first.
-Ask me clarifying questions. Then help me think through the options.</div>
+Walk me through the problem first.
+Ask clarifying questions before you jump to solutions.
+Then help me think through the options.</div>
 
     <p><strong>Execution</strong> (you know what you want)</p>
     <div class="prompt">I need to get [X] done today.
 Here's exactly what I want: [specific output].
 My constraints: [time / format / audience].
-Draft it. Then I'll tell you what to adjust.</div>
+Draft it directly.
+Then I'll tell you what to adjust.</div>
 
     <p><strong>Review</strong> (checking what you have)</p>
     <div class="prompt">Here's what I produced: [paste].
@@ -499,8 +684,9 @@ I want you to check it against [goal / criteria].
 Be direct. Tell me what's weak, not just what's good.
 If something is missing, name it specifically.</div>
 
-    <h3>Small Things Add Up</h3>
-    <p>Customizing AI isn't one big setup. It's small deliberate choices that compound. Configure a notification when Claude stops so you're not watching a screen. Set a keyboard shortcut you actually use. Write down one decision rule. Start tonight with the identity file. Everything else follows.</p>
+    <h3>What Changes</h3>
+    <p>If you prompt one question at a time with no context, you are doing the work of the system manually on every interaction. You are the harness.</p>
+    <p>Once the layers are in place, execution gets easier and the hard questions move upward. What is worth building. What does good look like. Is this actually what I meant. That is the shift from user to director.</p>
 
     <div class="switch-wrap">
       <button type="button" class="switch-btn" onclick="selectTrack('developer')">
@@ -517,10 +703,48 @@ If something is missing, name it specifically.</div>
 
     <h3>Making Claude Code Yours</h3>
     <p>You already have Claude Code running. This track is about the system you build around it: files, rituals, and patterns that turn a generic model into something that works with how you think.</p>
+    <p>The four layers stay the same. The implementation changes. Click through the stack for the developer version.</p>
 
-    <img src="images/diagram.png"
-         alt="Cross-section diagram: You at top, then four layers (Identity, Memory, Tools, Constraints), then The Model at bottom"
-         class="diagram">
+    <div class="layer-stack" data-track="developer">
+      <div class="layer-stack-shell" aria-label="Developer version of the four-layer system">
+        <div class="layer-stack-you">You</div>
+        <button type="button" class="layer-btn" data-layer="identity">
+          <span class="layer-btn-num">1</span>
+          <span class="layer-btn-copy">
+            <span class="layer-btn-title">Identity</span>
+            <span class="layer-btn-desc">Project rules, coding taste, and how the agent should reason.</span>
+          </span>
+        </button>
+        <button type="button" class="layer-btn" data-layer="memory">
+          <span class="layer-btn-num">2</span>
+          <span class="layer-btn-copy">
+            <span class="layer-btn-title">Memory</span>
+            <span class="layer-btn-desc">Live project context that survives beyond a single session.</span>
+          </span>
+        </button>
+        <button type="button" class="layer-btn" data-layer="tools">
+          <span class="layer-btn-num">3</span>
+          <span class="layer-btn-copy">
+            <span class="layer-btn-title">Tools</span>
+            <span class="layer-btn-desc">Files, shell, web, graphs, and the execution surface around the model.</span>
+          </span>
+        </button>
+        <button type="button" class="layer-btn" data-layer="constraints">
+          <span class="layer-btn-num">4</span>
+          <span class="layer-btn-copy">
+            <span class="layer-btn-title">Constraints</span>
+            <span class="layer-btn-desc">Permissions, plan mode, guardrails, and escalation rules.</span>
+          </span>
+        </button>
+        <div class="layer-stack-model">The Model</div>
+      </div>
+
+      <div class="layer-detail" data-detail-panel>
+        <p class="layer-detail-label">Selected Layer</p>
+        <h4 data-detail-title>Identity</h4>
+        <p data-detail-body>For developers, identity usually becomes a project file. It tells the coding agent how to behave before a single tool call happens: when to ask, when to push back, how surgical to be, and what quality bar to apply.</p>
+      </div>
+    </div>
 
     <h3>Layer 1: CLAUDE.md</h3>
     <p>A plain text file at your project root. Claude reads it before every conversation. For global defaults, put it in <code>~/.claude/CLAUDE.md</code>.</p>
@@ -592,37 +816,69 @@ Default to surfacing uncertainty, not hiding it.</code></pre>
     </div>
 
     <h3>Layer 2: Memory System</h3>
-    <p>Flat files in <code>~/.claude/projects/&lt;project&gt;/memory/</code>. Four types:</p>
-    <ul>
-      <li><code>user_*.md</code> — who you are, how you work</li>
-      <li><code>feedback_*.md</code> — corrections and confirmed approaches</li>
-      <li><code>project_*.md</code> — live decisions, what's in progress</li>
-      <li><code>reference_*.md</code> — where to find external information</li>
-    </ul>
-    <p>Each file has frontmatter: <code>name</code>, <code>description</code>, <code>type</code>. An index file <code>MEMORY.md</code> stays one line per memory and is always loaded. Claude reads all of it at the start of every conversation.</p>
+    <p>This layer is project-scope dependent. There is no single best memory system. The right one depends on how much context you have, how structured it is, and whether the main problem is retrieval, continuity, or understanding.</p>
+
+    <div class="callout">
+      <p class="callout-label">Why memory matters — a concrete example</p>
+      <p>At a recent hackathon, the challenge was building an AI agent that autonomously manages a restaurant: pricing, staffing, inventory, all decided by the agent with no human in the loop. The hardest problem wasn't the strategy. It was memory. Between each turn of the simulation, the model remembers nothing.</p>
+      <p>The solution: the agent wrote structured notes to itself every round. What it observed. What worked. What to watch for. By day ten, it had built its own institutional knowledge of how that restaurant operated.</p>
+      <p>The same principle applies to your Claude Code setup. The memory system is the mechanism that lets Claude accumulate context over time — so each session builds on the last instead of starting from zero.</p>
+    </div>
+
+    <div class="mini-grid">
+      <div class="mini-card">
+        <h4>Project memory in markdown</h4>
+        <p>Good default for small to medium projects. Use it when the main need is continuity: live decisions, confirmed patterns, and what changed since the last session.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Karpathy-style Obsidian wiki</h4>
+        <p>Best when the project grows into a long-lived knowledge base. Use it when you want human-readable notes, links between ideas, and a system that compounds over months rather than sessions.</p>
+      </div>
+      <div class="mini-card">
+        <h4><a href="https://github.com/hkuds/lightrag" target="_blank" rel="noopener">LightRAG</a></h4>
+        <p>Use it when the corpus is larger, messier, or spread across many documents and you need retrieval with graph-aware structure instead of reading everything directly.</p>
+      </div>
+      <div class="mini-card">
+        <h4><a href="https://github.com/safishamsi/graphify" target="_blank" rel="noopener">graphify</a></h4>
+        <p>Use it when the challenge is understanding relationships across code, docs, diagrams, screenshots, or video. It is especially strong when structure is the problem, not just recall.</p>
+      </div>
+    </div>
 
     <h3>Layer 3: Session Rituals</h3>
-    <p>Different session types need different opening frames.</p>
+    <p>The biggest win is not one perfect prompt. It is a repeatable opening and closing ritual that forces the agent to orient itself before work starts and to leave useful context behind when work ends.</p>
 
-    <p><strong>Planning</strong> (figuring something out, not executing yet)</p>
+    <div class="callout">
+      <p class="callout-label">Session-start</p>
+      <p>A pre-session briefing skill that reads project memory, the project instructions file, session handoffs, and git state before you code. The output is a practical briefing: what shipped yesterday, what today should aim at, where partner or branch integration might break, and the questions you forgot to ask.</p>
+      <p>The point is simple: do not let the model begin from vibes. Make it read the current state first.</p>
+    </div>
+
+    <div class="callout">
+      <p class="callout-label">Session-wrap</p>
+      <p>An end-of-session ritual that turns the current state into a clean handoff. It checks git, summarizes what was actually built, proposes the right commit shape, updates memory, writes partner-facing context, and flags stale files or loose ends.</p>
+      <p>This matters because the next strong session usually depends on the previous clean exit.</p>
+    </div>
+
+    <p><strong>Planning opener</strong></p>
     <div class="prompt">/session-start [planning]
 Working on: [X]
-Goal for this session: figure out [Y], not execute it.
-Call tools as needed to help me think. Walk me through things if I'm unclear.
-Mix options if there's more than one good path.
-Don't move to execution until I say so.</div>
+Goal for this session: understand the problem and define the approach.
+Use tools to gather context.
+Do not move to execution until the plan is clear.</div>
 
-    <p><strong>Execution</strong> (you know what you want, go fast)</p>
+    <p><strong>Execution opener</strong></p>
     <div class="prompt">/session-start [execution]
 Working on: [X]
-I know what I want. Execute [specific task].
-Check in at natural breakpoints. Don't ask for permission on small decisions.</div>
+Target outcome: [specific task]
+Read the project state first, then execute.
+Check in at natural breakpoints.</div>
 
-    <p><strong>Review</strong> (critical feedback on existing work)</p>
+    <p><strong>Review opener</strong></p>
     <div class="prompt">/session-start [review]
 Working on: [X]
-Here's what was produced: [link/paste].
-I want a critical review against [criteria]. Be direct about what's weak.</div>
+Review this against [criteria].
+Prioritize bugs, regressions, and weak assumptions.
+Be direct.</div>
 
     <h3>Layer 4: Plan Mode as a Working Pattern</h3>
     <p>The most underused feature for non-engineers. The workflow:</p>
@@ -635,7 +891,7 @@ I want a critical review against [criteria]. Be direct about what's weak.</div>
     <p>This shifts Claude from autocomplete to thinking partner with selective execution. The execution happens faster because the thinking happened first.</p>
 
     <h3>Small Things Add Up: Hooks and Notifications</h3>
-    <p>Add a macOS notification when Claude stops or needs input. Two minutes of setup, changes how the session feels.</p>
+    <p>Add a macOS notification when Claude stops or needs input. Two minutes of setup. Changes how every session feels — you stop watching a screen and start doing something else while it runs.</p>
 
     <div class="prompt">In ~/.claude/settings.json:
 
@@ -655,7 +911,7 @@ I want a critical review against [criteria]. Be direct about what's weak.</div>
   }
 }</div>
 
-    <p>The point isn't the notification. The point is that every small deliberate customization compounds. That's what building a system around the intelligence looks like.</p>
+    <p>The point isn't the notification. The point is that every small deliberate customisation compounds. That's what building a system around the intelligence looks like — not one big setup, but a series of small deliberate choices that accumulate over time.</p>
 
     <div class="switch-wrap">
       <button type="button" class="switch-btn" onclick="selectTrack('general')">
@@ -666,15 +922,79 @@ I want a critical review against [criteria]. Be direct about what's weak.</div>
   </section>
 
   <footer>
-    <p>Made by <a href="https://www.linkedin.com/in/toyesh-c/" target="_blank" rel="noopener">Toyesh Chakravorty</a></p>
+    <p>Talk by <a href="https://www.linkedin.com/in/toyesh-c/" target="_blank" rel="noopener">Toyesh Chakravorty</a> &nbsp;·&nbsp; Mindstone Amsterdam, May 2026</p>
+    <p style="margin-top:0.5rem;font-size:0.82rem;color:oklch(55% 0.02 260);">Opening frames by <strong>Yu Sugiyama</strong> — from ongoing digital legacy research in collaboration with partner companies.</p>
   </footer>
 
 </div>
 
 <script>
+  const layerContent = {
+    general: {
+      identity: {
+        title: 'Identity',
+        body: 'Before AI can help well, it needs a usable picture of who it is helping. Identity is where you define how you think, what you value, how you decide, and what kind of responses are actually useful to you.'
+      },
+      memory: {
+        title: 'Memory',
+        body: 'Identity is stable. Memory is dynamic. This layer holds the live context: current projects, recent decisions, unfinished loops, and the facts that matter this week but not forever.'
+      },
+      tools: {
+        title: 'Tools',
+        body: 'A model without tools can only talk. A model with tools can act. That could mean your files, calendar, browser, notes, or code. The exact tools matter less than the shift from conversation to execution.'
+      },
+      constraints: {
+        title: 'Constraints',
+        body: 'This is the boundary layer. What should AI never send, delete, publish, buy, or decide without asking you first? Most people define this only after something goes wrong. Better to define it up front.'
+      }
+    },
+    developer: {
+      identity: {
+        title: 'Layer 1: Identity',
+        body: 'For developers, identity usually becomes a project file like CLAUDE.md. It sets the reasoning style, quality bar, edit discipline, and behavioral defaults before the agent touches the repo.'
+      },
+      memory: {
+        title: 'Layer 2: Memory',
+        body: 'This is where project continuity lives. The format can be simple markdown, an Obsidian wiki, a retrieval system like LightRAG, or a structural graph like graphify. Pick based on corpus size and what kind of context you keep losing.'
+      },
+      tools: {
+        title: 'Layer 3: Tools',
+        body: 'Shell access, file reads, test commands, web lookup, graph tools, and repo-aware rituals change what the agent can do. The point is not more tools by default. The point is the right execution surface for the project.'
+      },
+      constraints: {
+        title: 'Layer 4: Constraints',
+        body: 'Permissions, plan mode, approval gates, branch rules, and explicit escalation are what stop autonomous coding from becoming chaotic coding. Strong constraints make the system usable, not weaker.'
+      }
+    }
+  };
+
+  function setActiveLayer(track, layer) {
+    const root = document.querySelector(`.layer-stack[data-track="${track}"]`);
+    if (!root) return;
+
+    root.querySelectorAll('.layer-btn').forEach((button) => {
+      button.classList.toggle('is-active', button.dataset.layer === layer);
+    });
+
+    const panel = root.querySelector('[data-detail-panel]');
+    const content = layerContent[track][layer];
+    if (!panel || !content) return;
+
+    panel.querySelector('[data-detail-title]').textContent = content.title;
+    panel.querySelector('[data-detail-body]').textContent = content.body;
+  }
+
+  document.querySelectorAll('.layer-stack').forEach((stack) => {
+    const track = stack.dataset.track;
+    stack.querySelectorAll('.layer-btn').forEach((button) => {
+      button.addEventListener('click', () => setActiveLayer(track, button.dataset.layer));
+    });
+  });
+
   function selectTrack(track) {
     const targetId = track === 'developer' ? 'developer-track' : 'general-track';
     document.body.classList.toggle('show-developer', track === 'developer');
+    setActiveLayer(track, 'identity');
 
     const target = document.getElementById(targetId);
     if (!target) return;
@@ -683,6 +1003,9 @@ I want a critical review against [criteria]. Be direct about what's weak.</div>
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
+
+  setActiveLayer('general', 'identity');
+  setActiveLayer('developer', 'identity');
 </script>
 
 </body>
