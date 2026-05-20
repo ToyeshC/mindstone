@@ -223,18 +223,19 @@
       display: grid;
       gap: var(--space-md);
       justify-items: center;
+      overflow: visible;
     }
 
     .layer-stack-you,
     .layer-stack-model,
-    .layer-btn {
+    .layer-item {
       width: min(440px, 100%);
-      border-radius: 999px;
-      text-align: center;
     }
 
     .layer-stack-you,
     .layer-stack-model {
+      border-radius: 999px;
+      text-align: center;
       border: 1px solid var(--accent-mid);
       background-color: var(--cream);
       padding: 0.75rem 1rem;
@@ -245,38 +246,51 @@
       color: var(--accent);
     }
 
-    .layer-btn {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      align-items: center;
-      gap: 0.9rem;
+    .layer-item {
+      position: relative;
       border: 1px solid var(--accent-mid);
+      border-radius: 2rem;
       background-color: #fffaf2;
-      padding: 0.95rem 1.1rem;
-      color: var(--dark);
-      cursor: pointer;
+      z-index: 0;
       transition:
         border-color 0.18s cubic-bezier(0.25, 0, 0, 1),
         background-color 0.18s cubic-bezier(0.25, 0, 0, 1),
         transform 0.18s cubic-bezier(0.25, 0, 0, 1);
     }
 
-    .layer-btn:hover {
+    .layer-item:hover {
       border-color: var(--accent);
       transform: translateY(-1px);
     }
 
-    .layer-btn.is-active {
+    .layer-item.is-active {
       background-color: var(--accent-light);
       border-color: var(--accent);
+      z-index: 3;
     }
 
-    .layer-btn:focus-visible {
+    .layer-item-toggle {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 0.9rem;
+      padding: 0.95rem 1.1rem;
+      color: var(--dark);
+      background: transparent;
+      border: 0;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .layer-item-toggle:focus-visible {
       outline: 3px solid var(--accent);
       outline-offset: 3px;
+      border-radius: 1.5rem;
     }
 
-    .layer-btn-num {
+    .layer-item-num {
       width: 2.05rem;
       height: 2.05rem;
       border-radius: 50%;
@@ -288,11 +302,11 @@
       font-weight: 700;
     }
 
-    .layer-btn-copy {
+    .layer-item-copy {
       text-align: left;
     }
 
-    .layer-btn-title {
+    .layer-item-title {
       display: block;
       font-family: var(--font-display);
       font-size: 1.08rem;
@@ -301,40 +315,55 @@
       margin-bottom: 0.18rem;
     }
 
-    .layer-btn-desc {
+    .layer-item-desc {
       display: block;
       font-size: 0.9rem;
       color: oklch(38% 0.02 260);
       line-height: 1.45;
     }
 
-    .layer-detail {
-      margin-top: var(--space-lg);
+    .layer-item-popout {
+      position: absolute;
+      top: 50%;
+      left: calc(100% - 1rem);
+      width: min(20rem, calc(100vw - 3rem));
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--accent);
+      border-radius: 1rem;
       background-color: var(--accent-light);
-      border: 1px solid var(--accent-mid);
-      border-radius: 8px;
-      padding: var(--space-md);
+      box-shadow: 0 18px 45px rgba(40, 28, 16, 0.14);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate(-0.8rem, -50%);
+      transition:
+        opacity 0.18s cubic-bezier(0.25, 0, 0, 1),
+        transform 0.18s cubic-bezier(0.25, 0, 0, 1),
+        visibility 0.18s cubic-bezier(0.25, 0, 0, 1);
     }
 
-    .layer-detail-label {
-      font-family: var(--font-display);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: var(--space-sm);
+    .layer-item-popout::before {
+      content: "";
+      position: absolute;
+      left: -0.45rem;
+      top: calc(50% - 0.45rem);
+      width: 0.9rem;
+      height: 0.9rem;
+      background-color: var(--accent-light);
+      border-left: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+      transform: rotate(45deg);
     }
 
-    .layer-detail h4 {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 600;
-      line-height: 1.25;
-      margin-bottom: 0.55rem;
+    .layer-item.is-active .layer-item-popout {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(0, -50%);
     }
 
-    .layer-detail p:last-child {
+    .layer-item-popout p {
+      font-size: 0.96rem;
+      line-height: 1.65;
       margin-bottom: 0;
     }
 
@@ -493,13 +522,33 @@
         padding: var(--space-xl) var(--space-md) var(--space-lg);
       }
 
-      .layer-btn {
+      .layer-item-toggle {
         grid-template-columns: 1fr;
         text-align: left;
       }
 
-      .layer-btn-num {
+      .layer-item-num {
         margin-bottom: 0.25rem;
+      }
+
+      .layer-item-popout {
+        left: 0.9rem;
+        right: 0.9rem;
+        top: calc(100% - 0.55rem);
+        width: auto;
+        transform: translateY(-0.8rem);
+      }
+
+      .layer-item-popout::before {
+        left: 1.35rem;
+        top: -0.45rem;
+        border-left: 1px solid var(--accent);
+        border-bottom: 1px solid var(--accent);
+        transform: rotate(135deg);
+      }
+
+      .layer-item.is-active .layer-item-popout {
+        transform: translateY(0);
       }
     }
 
@@ -566,41 +615,55 @@
     <div class="layer-stack" data-track="general">
       <div class="layer-stack-shell" aria-label="Four layers between you and the model">
         <div class="layer-stack-you">You</div>
-        <button type="button" class="layer-btn" data-layer="identity">
-          <span class="layer-btn-num">1</span>
-          <span class="layer-btn-copy">
-            <span class="layer-btn-title">Identity</span>
-            <span class="layer-btn-desc">How you think. What you value. What good help feels like.</span>
-          </span>
-        </button>
-        <button type="button" class="layer-btn" data-layer="memory">
-          <span class="layer-btn-num">2</span>
-          <span class="layer-btn-copy">
-            <span class="layer-btn-title">Memory</span>
-            <span class="layer-btn-desc">What is live right now. Projects, decisions, unfinished loops.</span>
-          </span>
-        </button>
-        <button type="button" class="layer-btn" data-layer="tools">
-          <span class="layer-btn-num">3</span>
-          <span class="layer-btn-copy">
-            <span class="layer-btn-title">Tools</span>
-            <span class="layer-btn-desc">What the model can act on beyond chat.</span>
-          </span>
-        </button>
-        <button type="button" class="layer-btn" data-layer="constraints">
-          <span class="layer-btn-num">4</span>
-          <span class="layer-btn-copy">
-            <span class="layer-btn-title">Constraints</span>
-            <span class="layer-btn-desc">What it should never do without asking you first.</span>
-          </span>
-        </button>
+        <div class="layer-item" data-layer="identity">
+          <button type="button" class="layer-item-toggle" aria-expanded="false">
+            <span class="layer-item-num">1</span>
+            <span class="layer-item-copy">
+              <span class="layer-item-title">Identity</span>
+              <span class="layer-item-desc">How you think. What you value. What good help feels like.</span>
+            </span>
+          </button>
+          <div class="layer-item-popout">
+            <p>Before AI can help well, it needs a usable picture of who it is helping. Identity is where you define how you think, what you value, how you decide, and what kind of responses are actually useful to you.</p>
+          </div>
+        </div>
+        <div class="layer-item" data-layer="memory">
+          <button type="button" class="layer-item-toggle" aria-expanded="false">
+            <span class="layer-item-num">2</span>
+            <span class="layer-item-copy">
+              <span class="layer-item-title">Memory</span>
+              <span class="layer-item-desc">What is live right now. Projects, decisions, unfinished loops.</span>
+            </span>
+          </button>
+          <div class="layer-item-popout">
+            <p>Identity is stable. Memory is dynamic. This layer holds the live context: current projects, recent decisions, unfinished loops, and the facts that matter this week but not forever.</p>
+          </div>
+        </div>
+        <div class="layer-item" data-layer="tools">
+          <button type="button" class="layer-item-toggle" aria-expanded="false">
+            <span class="layer-item-num">3</span>
+            <span class="layer-item-copy">
+              <span class="layer-item-title">Tools</span>
+              <span class="layer-item-desc">What the model can act on beyond chat.</span>
+            </span>
+          </button>
+          <div class="layer-item-popout">
+            <p>A model without tools can only talk. A model with tools can act. That could mean your files, calendar, browser, notes, or code. The exact tools matter less than the shift from conversation to execution.</p>
+          </div>
+        </div>
+        <div class="layer-item" data-layer="constraints">
+          <button type="button" class="layer-item-toggle" aria-expanded="false">
+            <span class="layer-item-num">4</span>
+            <span class="layer-item-copy">
+              <span class="layer-item-title">Constraints</span>
+              <span class="layer-item-desc">What it should never do without asking you first.</span>
+            </span>
+          </button>
+          <div class="layer-item-popout">
+            <p>This is the boundary layer. What should AI never send, delete, publish, buy, or decide without asking you first? Most people define this only after something goes wrong. Better to define it up front.</p>
+          </div>
+        </div>
         <div class="layer-stack-model">The Model</div>
-      </div>
-
-      <div class="layer-detail" data-detail-panel>
-        <p class="layer-detail-label">Selected Layer</p>
-        <h4 data-detail-title>Identity</h4>
-        <p data-detail-body>Before AI can help well, it needs a usable picture of who it is helping. Identity is the layer that makes the answers feel like they were written for a person instead of for a generic internet average.</p>
       </div>
     </div>
 
@@ -708,41 +771,55 @@ If something is missing, name it specifically.</div>
     <div class="layer-stack" data-track="developer">
       <div class="layer-stack-shell" aria-label="Developer version of the four-layer system">
         <div class="layer-stack-you">You</div>
-        <button type="button" class="layer-btn" data-layer="identity">
-          <span class="layer-btn-num">1</span>
-          <span class="layer-btn-copy">
-            <span class="layer-btn-title">Identity</span>
-            <span class="layer-btn-desc">Project rules, coding taste, and how the agent should reason.</span>
-          </span>
-        </button>
-        <button type="button" class="layer-btn" data-layer="memory">
-          <span class="layer-btn-num">2</span>
-          <span class="layer-btn-copy">
-            <span class="layer-btn-title">Memory</span>
-            <span class="layer-btn-desc">Live project context that survives beyond a single session.</span>
-          </span>
-        </button>
-        <button type="button" class="layer-btn" data-layer="tools">
-          <span class="layer-btn-num">3</span>
-          <span class="layer-btn-copy">
-            <span class="layer-btn-title">Tools</span>
-            <span class="layer-btn-desc">Files, shell, web, graphs, and the execution surface around the model.</span>
-          </span>
-        </button>
-        <button type="button" class="layer-btn" data-layer="constraints">
-          <span class="layer-btn-num">4</span>
-          <span class="layer-btn-copy">
-            <span class="layer-btn-title">Constraints</span>
-            <span class="layer-btn-desc">Permissions, plan mode, guardrails, and escalation rules.</span>
-          </span>
-        </button>
+        <div class="layer-item" data-layer="identity">
+          <button type="button" class="layer-item-toggle" aria-expanded="false">
+            <span class="layer-item-num">1</span>
+            <span class="layer-item-copy">
+              <span class="layer-item-title">Identity</span>
+              <span class="layer-item-desc">Project rules, coding taste, and how the agent should reason.</span>
+            </span>
+          </button>
+          <div class="layer-item-popout">
+            <p>For developers, identity usually becomes a project file like CLAUDE.md. It sets the reasoning style, quality bar, edit discipline, and behavioral defaults before the agent touches the repo.</p>
+          </div>
+        </div>
+        <div class="layer-item" data-layer="memory">
+          <button type="button" class="layer-item-toggle" aria-expanded="false">
+            <span class="layer-item-num">2</span>
+            <span class="layer-item-copy">
+              <span class="layer-item-title">Memory</span>
+              <span class="layer-item-desc">Live project context that survives beyond a single session.</span>
+            </span>
+          </button>
+          <div class="layer-item-popout">
+            <p>This is where project continuity lives. The format can be simple markdown, an Obsidian wiki, a retrieval system like LightRAG, or a structural graph like graphify. Pick based on corpus size and what kind of context you keep losing.</p>
+          </div>
+        </div>
+        <div class="layer-item" data-layer="tools">
+          <button type="button" class="layer-item-toggle" aria-expanded="false">
+            <span class="layer-item-num">3</span>
+            <span class="layer-item-copy">
+              <span class="layer-item-title">Tools</span>
+              <span class="layer-item-desc">Files, shell, web, graphs, and the execution surface around the model.</span>
+            </span>
+          </button>
+          <div class="layer-item-popout">
+            <p>Shell access, file reads, test commands, web lookup, graph tools, and repo-aware rituals change what the agent can do. The point is not more tools by default. The point is the right execution surface for the project.</p>
+          </div>
+        </div>
+        <div class="layer-item" data-layer="constraints">
+          <button type="button" class="layer-item-toggle" aria-expanded="false">
+            <span class="layer-item-num">4</span>
+            <span class="layer-item-copy">
+              <span class="layer-item-title">Constraints</span>
+              <span class="layer-item-desc">Permissions, plan mode, guardrails, and escalation rules.</span>
+            </span>
+          </button>
+          <div class="layer-item-popout">
+            <p>Permissions, plan mode, approval gates, branch rules, and explicit escalation are what stop autonomous coding from becoming chaotic coding. Strong constraints make the system usable, not weaker.</p>
+          </div>
+        </div>
         <div class="layer-stack-model">The Model</div>
-      </div>
-
-      <div class="layer-detail" data-detail-panel>
-        <p class="layer-detail-label">Selected Layer</p>
-        <h4 data-detail-title>Identity</h4>
-        <p data-detail-body>For developers, identity usually becomes a project file. It tells the coding agent how to behave before a single tool call happens: when to ask, when to push back, how surgical to be, and what quality bar to apply.</p>
       </div>
     </div>
 
@@ -929,72 +1006,44 @@ Be direct.</div>
 </div>
 
 <script>
-  const layerContent = {
-    general: {
-      identity: {
-        title: 'Identity',
-        body: 'Before AI can help well, it needs a usable picture of who it is helping. Identity is where you define how you think, what you value, how you decide, and what kind of responses are actually useful to you.'
-      },
-      memory: {
-        title: 'Memory',
-        body: 'Identity is stable. Memory is dynamic. This layer holds the live context: current projects, recent decisions, unfinished loops, and the facts that matter this week but not forever.'
-      },
-      tools: {
-        title: 'Tools',
-        body: 'A model without tools can only talk. A model with tools can act. That could mean your files, calendar, browser, notes, or code. The exact tools matter less than the shift from conversation to execution.'
-      },
-      constraints: {
-        title: 'Constraints',
-        body: 'This is the boundary layer. What should AI never send, delete, publish, buy, or decide without asking you first? Most people define this only after something goes wrong. Better to define it up front.'
-      }
-    },
-    developer: {
-      identity: {
-        title: 'Layer 1: Identity',
-        body: 'For developers, identity usually becomes a project file like CLAUDE.md. It sets the reasoning style, quality bar, edit discipline, and behavioral defaults before the agent touches the repo.'
-      },
-      memory: {
-        title: 'Layer 2: Memory',
-        body: 'This is where project continuity lives. The format can be simple markdown, an Obsidian wiki, a retrieval system like LightRAG, or a structural graph like graphify. Pick based on corpus size and what kind of context you keep losing.'
-      },
-      tools: {
-        title: 'Layer 3: Tools',
-        body: 'Shell access, file reads, test commands, web lookup, graph tools, and repo-aware rituals change what the agent can do. The point is not more tools by default. The point is the right execution surface for the project.'
-      },
-      constraints: {
-        title: 'Layer 4: Constraints',
-        body: 'Permissions, plan mode, approval gates, branch rules, and explicit escalation are what stop autonomous coding from becoming chaotic coding. Strong constraints make the system usable, not weaker.'
-      }
-    }
-  };
-
   function setActiveLayer(track, layer) {
     const root = document.querySelector(`.layer-stack[data-track="${track}"]`);
     if (!root) return;
 
-    root.querySelectorAll('.layer-btn').forEach((button) => {
-      button.classList.toggle('is-active', button.dataset.layer === layer);
+    root.querySelectorAll('.layer-item').forEach((item) => {
+      const isActive = layer !== null && item.dataset.layer === layer;
+      const toggle = item.querySelector('.layer-item-toggle');
+      item.classList.toggle('is-active', isActive);
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      }
     });
-
-    const panel = root.querySelector('[data-detail-panel]');
-    const content = layerContent[track][layer];
-    if (!panel || !content) return;
-
-    panel.querySelector('[data-detail-title]').textContent = content.title;
-    panel.querySelector('[data-detail-body]').textContent = content.body;
   }
 
   document.querySelectorAll('.layer-stack').forEach((stack) => {
     const track = stack.dataset.track;
-    stack.querySelectorAll('.layer-btn').forEach((button) => {
-      button.addEventListener('click', () => setActiveLayer(track, button.dataset.layer));
+    stack.querySelectorAll('.layer-item-toggle').forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.layer-item');
+        if (!item) return;
+        if (item.classList.contains('is-active')) {
+          setActiveLayer(track, null);
+          return;
+        }
+        setActiveLayer(track, item.dataset.layer);
+      });
     });
   });
+
+  window.addEventListener('scroll', () => {
+    setActiveLayer('general', null);
+    setActiveLayer('developer', null);
+  }, { passive: true });
 
   function selectTrack(track) {
     const targetId = track === 'developer' ? 'developer-track' : 'general-track';
     document.body.classList.toggle('show-developer', track === 'developer');
-    setActiveLayer(track, 'identity');
+    setActiveLayer(track, null);
 
     const target = document.getElementById(targetId);
     if (!target) return;
@@ -1004,8 +1053,8 @@ Be direct.</div>
     });
   }
 
-  setActiveLayer('general', 'identity');
-  setActiveLayer('developer', 'identity');
+  setActiveLayer('general', null);
+  setActiveLayer('developer', null);
 </script>
 
 </body>
